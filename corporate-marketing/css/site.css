@@ -1,0 +1,344 @@
+/* ==========================================================================
+   Carol S. Spalding, EdD. Overrides on the MegaOne `corporate-marketing` demo.
+   Loaded last. The demo is a marketing agency page: rotating headline, owl
+   carousels, team grid, testimonials, blog, and three full-bleed photographic
+   bands. None of that survives. What is kept is its nine section shells and
+   its four-up icon row, because those map onto her content.
+   ========================================================================== */
+
+:root{
+  --cs-ink:#1A1F3A;          /* deep indigo. Not Berenbeim's navy, not Love's slate */
+  --cs-ink-2:#2A3152;
+  --cs-muted:#5A6180;
+  --cs-acc:#2E8B7A;          /* teal green, for rules, borders and large figures */
+  /* One accent cannot serve every ground, and the small uppercase labels here
+     are 11px to 12.5px, which WCAG treats as normal text at 4.5:1. Measured:
+       2E8B7A on white  = 4.13:1  fails
+       1F6B5C on white  = 6.29:1  passes
+       57C4AC on ink    = 8.84:1  passes
+     So small text takes a derived token depending on what is behind it. */
+  --cs-acc-ink:#1F6B5C;
+  --cs-acc-lift:#57C4AC;
+  --cs-line:rgba(26,31,58,.14);
+  --cs-paper:#F4F4F0;
+}
+
+html,body{ overflow-x:hidden }
+body{
+  font-family:"Inter", "Helvetica Neue", Arial, sans-serif;
+  color:var(--cs-ink); background:#fff; font-size:17px; line-height:1.7;
+}
+h1,h2,h3,h4,h5,.sec-title,.feature-heading,.banner-heading{
+  font-family:"Fraunces", Georgia, serif; font-weight:600; letter-spacing:-.01em;
+}
+.kicker,.tl-year,.aw-year,.svc-year,.navbar,.button,.buton,.banner-text,.count-static{
+  font-family:"Inter", Arial, sans-serif;
+}
+
+/* ---------- shared furniture --------------------------------------------- */
+.kicker{
+  font-size:11px; letter-spacing:.22em; text-transform:uppercase;
+  color:var(--cs-acc-ink); font-weight:700; margin:0 0 14px;
+}
+.sec-title{
+  font-size:clamp(25px,3.3vw,42px); line-height:1.2; color:var(--cs-ink);
+  margin:0 0 18px; text-wrap:balance; max-width:32ch;
+}
+.sec-lead{ color:var(--cs-muted); font-size:17px; line-height:1.7; max-width:64ch; margin:0 }
+.sec-head{ margin-bottom:clamp(26px,3.6vw,46px) }
+.author-skills,.team-sec,.portfolio,.our-clients,.blog-section,.contact-section{
+  padding:clamp(60px,8vw,100px) 0;
+}
+.feature-sec{ padding:clamp(60px,8vw,100px) 0 !important }
+.team-sec,.our-clients{ background:var(--cs-paper) }
+
+/* ---------- nav ----------------------------------------------------------- */
+.navbar{ background:transparent; padding:16px 0; transition:background .25s }
+.header.header-appear .navbar{ background:rgba(16,20,38,.95) }
+.navbar .nav-link{
+  color:rgba(255,255,255,.88) !important; font-size:12.5px; letter-spacing:.09em;
+  text-transform:uppercase; font-weight:600; padding:6px 10px !important;
+}
+.navbar .nav-link:hover{ color:#fff !important }
+.wordmark{ text-decoration:none !important; line-height:1.15 }
+.wordmark b{ display:block; font-family:"Fraunces",Georgia,serif; font-size:17px; color:#fff; font-weight:600 }
+.wordmark span{
+  display:block; font-family:"Inter",Arial,sans-serif; font-size:9.5px; letter-spacing:.18em;
+  text-transform:uppercase; color:var(--cs-acc-lift); margin-top:3px;
+}
+.navbar-toggler{ border-color:rgba(255,255,255,.4) }
+.navbar-toggler-icon{ filter:invert(1) brightness(2) }
+
+/* ---------- hero ---------------------------------------------------------- */
+/* The demo hero is a full-bleed stock photograph behind a dark overlay. Hers
+   is the one genuine photograph we have, so it sits in the layout as a portrait
+   rather than being flattened into a background. */
+.banner-sec.banner-image{
+  background-image:
+    radial-gradient(110% 80% at 82% 12%, rgba(46,139,122,.24), transparent 62%),
+    linear-gradient(158deg, #12162C 0%, #1A1F3A 52%, #242B4D 100%) !important;
+  background-size:cover !important; min-height:100vh;
+  display:flex; align-items:center; padding:120px 0 80px;
+}
+.banner-sec .banner-overlay{ background:none !important; padding:0 !important }
+.banner-area{ padding-right:clamp(0px,2.5vw,40px) }
+.banner-text{
+  font-size:11px !important; letter-spacing:.22em; text-transform:uppercase;
+  color:var(--cs-acc-lift) !important; font-weight:700; margin:0 0 20px !important;
+}
+.banner-heading{
+  color:#fff !important; font-size:clamp(34px,5.2vw,68px) !important; line-height:1.03 !important;
+  margin:0 0 14px !important; font-weight:600;
+}
+.banner-heading .suffix{
+  font-family:"Inter",Arial,sans-serif; font-size:clamp(13px,1.5vw,18px);
+  letter-spacing:.2em; text-transform:uppercase; color:var(--cs-acc-lift);
+  font-weight:600; margin-top:12px;
+}
+.banner-des{
+  color:rgba(255,255,255,.82) !important; font-family:"Inter",Arial,sans-serif !important;
+  font-size:clamp(12px,1.35vw,15px) !important; letter-spacing:.05em; text-transform:uppercase;
+  font-weight:500; margin:0 0 26px !important;
+}
+.banner-lede{ color:rgba(255,255,255,.90); font-size:clamp(16px,1.6vw,19px); line-height:1.62; max-width:56ch; margin:0 0 32px }
+.banner-btn .button{
+  display:inline-flex; align-items:center; gap:10px; color:#fff !important;
+  background:none !important; border:1px solid rgba(255,255,255,.42);
+  padding:13px 22px !important; border-radius:2px;
+  font-size:12px; letter-spacing:.16em; text-transform:uppercase; font-weight:700;
+  text-decoration:none !important; transition:.25s;
+}
+.banner-btn .button:hover{ background:var(--cs-acc) !important; border-color:var(--cs-acc) }
+
+.hero-portrait{ margin:0 }
+.hero-portrait img{
+  width:100%; height:auto; display:block; border-bottom:4px solid var(--cs-acc);
+}
+.hero-portrait figcaption{
+  margin-top:10px; font-size:11.5px; letter-spacing:.04em;
+  color:rgba(255,255,255,.62); font-family:"Inter",Arial,sans-serif;
+}
+
+/* ---------- four pillars -------------------------------------------------- */
+.author-skills .about-media{
+  padding:28px 22px 30px; border:1px solid var(--cs-line); margin-bottom:24px;
+  text-align:left; transition:box-shadow .25s, transform .25s, background .25s;
+  border-top:3px solid var(--cs-acc);
+}
+.author-skills .about-media.active{ box-shadow:0 14px 40px rgba(26,31,58,.12); transform:translateY(-3px) }
+.about-icon{ display:block; font-size:30px; color:var(--cs-acc-ink); margin-bottom:14px; line-height:1 }
+.author-skills .small-heading{ font-size:20px !important; color:var(--cs-ink) !important; margin:0 0 8px !important }
+.author-skills .small-text{ color:var(--cs-muted) !important; font-size:15px !important; line-height:1.6; margin:0 }
+
+/* ---------- through-line -------------------------------------------------- */
+.feature-heading{
+  font-size:clamp(24px,3.1vw,38px) !important; line-height:1.22 !important;
+  color:var(--cs-ink) !important; margin:0 0 20px !important; max-width:30ch;
+}
+.feature-text{ color:var(--cs-ink-2) !important; font-size:17px !important; line-height:1.72; margin:0 0 16px !important }
+.feature-note{ color:var(--cs-muted); font-size:15.5px; line-height:1.65; font-style:italic; margin:22px 0 0; max-width:60ch }
+.pull-quote{ border-left:3px solid var(--cs-acc); padding:6px 0 6px 26px }
+.pull-quote blockquote{
+  font-family:"Fraunces",Georgia,serif; font-size:clamp(18px,2vw,23px); line-height:1.45;
+  color:var(--cs-ink); margin:0 0 14px; font-weight:500;
+}
+.pull-quote blockquote::before{ content:"\201C" } .pull-quote blockquote::after{ content:"\201D" }
+.pull-quote cite{ display:block; font-style:normal; color:var(--cs-muted); font-size:13.5px; line-height:1.6 }
+
+/* ---------- the figures band --------------------------------------------- */
+/* The demo band is a stock photograph with a count-up script over it. The
+   script comma-formats every number, which turns a year into "2,008", so the
+   markup deliberately does not use its .count hook. */
+.counter-sec.counter-image{
+  background-image:linear-gradient(100deg, #1F6B5C 0%, #2E8B7A 100%) !important;
+  padding:clamp(46px,6vw,74px) 0;
+}
+.counter-sec .counter-overlay{ background:none !important; padding:0 !important }
+.counter-area{ display:grid; grid-template-columns:repeat(4,1fr); gap:28px; width:100%; text-align:left }
+.counter{ padding:0 }
+.count-static{
+  display:block; font-size:clamp(34px,4.4vw,54px); line-height:1; color:#fff;
+  font-weight:700; letter-spacing:-.02em; font-variant-numeric:tabular-nums; margin:0 0 10px;
+}
+.counter p{ color:rgba(255,255,255,.90); font-size:14.5px; line-height:1.5; margin:0; max-width:24ch }
+
+/* ---------- the record --------------------------------------------------- */
+.era{
+  font-family:"Inter",Arial,sans-serif; font-size:11px; letter-spacing:.18em;
+  text-transform:uppercase; color:var(--cs-ink); font-weight:700;
+  margin:clamp(24px,3.4vw,40px) 0 4px; padding-bottom:12px;
+  border-bottom:2px solid var(--cs-ink);
+}
+.era.second{ margin-top:clamp(36px,4.6vw,58px) }
+.tl{ list-style:none; margin:0; padding:0 }
+.tl-row{
+  display:grid; grid-template-columns:140px minmax(0,1fr); gap:4px 26px;
+  padding:22px 0; border-bottom:1px solid var(--cs-line); align-items:baseline;
+}
+.tl-year{
+  font-size:12.5px; letter-spacing:.05em; font-weight:700; color:var(--cs-acc-ink);
+  text-transform:uppercase; font-variant-numeric:tabular-nums; padding-top:4px;
+}
+.tl-title{ font-size:20px; color:var(--cs-ink); margin:0 0 4px; line-height:1.3 }
+.tl-note{ margin:4px 0 0; color:var(--cs-muted); font-size:15.5px; line-height:1.6 }
+.tl-foot{ margin:26px 0 0; color:var(--cs-muted); font-size:13.5px; line-height:1.6; max-width:76ch }
+
+/* ---------- what she built ----------------------------------------------- */
+.built-grid{ margin-top:0 }
+.built{
+  border:1px solid var(--cs-line); border-left:3px solid var(--cs-acc);
+  padding:24px 22px 26px; height:100%; margin-bottom:24px; background:#fff;
+  transition:box-shadow .25s, transform .25s;
+}
+.built:hover{ box-shadow:0 14px 40px rgba(26,31,58,.12); transform:translateY(-3px) }
+.built h4{ font-size:19px; color:var(--cs-ink); margin:0 0 10px; line-height:1.32 }
+.built p{ color:var(--cs-muted); font-size:15px; line-height:1.6; margin:0 }
+
+/* ---------- recognition -------------------------------------------------- */
+.award-list{ list-style:none; margin:0; padding:0 }
+.award-list li{
+  display:grid; grid-template-columns:110px minmax(0,1.5fr) minmax(0,1.4fr); gap:6px 24px;
+  padding:18px 0; border-top:1px solid var(--cs-line); align-items:baseline;
+}
+.award-list li:last-child{ border-bottom:1px solid var(--cs-line) }
+.aw-year{ font-size:12.5px; font-weight:700; color:var(--cs-acc-ink); font-variant-numeric:tabular-nums }
+.aw-name{ font-size:17px; font-weight:600; color:var(--cs-ink); line-height:1.4 }
+.aw-org{ font-size:15px; color:var(--cs-ink-2); line-height:1.55 }
+.sub-era{
+  font-family:"Inter",Arial,sans-serif; font-size:11px; letter-spacing:.18em;
+  text-transform:uppercase; color:var(--cs-muted); font-weight:700;
+  margin:clamp(30px,4vw,48px) 0 6px;
+}
+.sub-era.first{ margin-top:0 }
+
+/* ---------- service and credentials -------------------------------------- */
+.blog-section{ background:#fff !important; background-image:none !important }
+.svc-list,.cred-list{ list-style:none; margin:0; padding:0 }
+.svc-list li{ padding:17px 0; border-top:1px solid var(--cs-line) }
+.svc-list li:last-child{ border-bottom:1px solid var(--cs-line) }
+.svc-year{
+  display:block; font-family:"Inter",Arial,sans-serif; font-size:11px; letter-spacing:.14em;
+  text-transform:uppercase; color:var(--cs-acc-ink); font-weight:700; margin-bottom:6px;
+}
+.svc-list li b{ display:block; font-size:17px; color:var(--cs-ink); line-height:1.35; margin-bottom:4px }
+.svc-list li span:not(.svc-year){ display:block; color:var(--cs-muted); font-size:15px; line-height:1.55 }
+.cred-list li{ padding:15px 0; border-top:1px solid var(--cs-line) }
+.cred-list li b{ display:block; font-size:17px; color:var(--cs-ink); margin-bottom:4px }
+.cred-list li span{ display:block; color:var(--cs-muted); font-size:14.5px; line-height:1.55 }
+
+/* ---------- contact ------------------------------------------------------- */
+/* The demo contact block is a form posting through vendor/contact_us.js to a
+   PHP mailer that does not exist on static hosting, plus an embedded Google
+   map. Both removed: the form would discard every enquiry, and the map is a
+   third party request on a page that needs none. */
+.contact-section form,.contact-section #map,.contact-section .map{ display:none !important }
+.doors-row{ margin-top:clamp(20px,3vw,34px) }
+.door{
+  display:block; border:1px solid var(--cs-line); border-top:3px solid var(--cs-acc);
+  padding:26px 24px 28px; height:100%; margin-bottom:24px;
+  text-decoration:none !important; transition:box-shadow .25s, transform .25s;
+}
+.door:hover{ box-shadow:0 14px 40px rgba(26,31,58,.12); transform:translateY(-3px) }
+.door b{ display:block; font-family:"Fraunces",Georgia,serif; font-size:20px; color:var(--cs-ink); margin-bottom:8px }
+.door span{ display:block; color:var(--cs-muted); font-size:15px; line-height:1.6 }
+.site-foot{ margin-top:clamp(30px,4vw,52px); padding:26px 0 0; border-top:1px solid var(--cs-line) }
+.site-foot p{ margin:0; color:var(--cs-muted); font-size:13.5px; line-height:1.65 }
+.src-note{ max-width:82ch }
+
+/* wow.js starts elements hidden; if it fails they must not stay hidden */
+.no-js .wow,.wow.animated{ visibility:visible !important }
+
+@media (max-width:991px){
+  .banner-sec.banner-image{ min-height:auto; padding:120px 0 70px }
+  .banner-area{ padding-right:0; margin-bottom:38px }
+  .counter-area{ grid-template-columns:1fr 1fr; gap:24px }
+  .pull-quote{ margin-top:34px }
+}
+@media (max-width:575px){
+  .counter-area{ grid-template-columns:1fr }
+  .tl-row{ grid-template-columns:1fr; gap:6px }
+  .tl-year{ padding-top:0 }
+  .award-list li{ grid-template-columns:96px minmax(0,1fr) }
+  .award-list .aw-org{ grid-column:2 }
+}
+
+/* ==========================================================================
+   Demo geometry and colour, unpicked.
+   Everything below fixes a specific measured failure, not a guess.
+   ========================================================================== */
+
+/* HERO. The demo builds this as a fixed 600x420 lime slab, absolutely centred
+   and nudged with a transform, with two more transforms stacked on the heading
+   and the inner area. My two column row was living inside that 600px box, so
+   the content was shoved right and overflowed the fold. All of it removed. */
+.banner-sec.banner-image{ height:auto !important }
+.banner-sec .banner-overlay{
+  position:static !important; top:auto !important; left:auto !important;
+  transform:none !important; width:auto !important; height:auto !important;
+  background-color:transparent !important;
+}
+.banner-sec .banner-heading{ width:auto !important; transform:none !important }
+.banner-sec .banner-area{ position:static !important; top:auto !important; transform:none !important }
+
+/* FOUR PILLARS. `.about-media.active` is demo cyan (#00bcd4), and my dark body
+   text on it measured 1.91:1. The icon colour is set on the child <i>, not the
+   span, so my rule never applied and it sat at 2.76:1 grey on white. The
+   heading is demo grey. All three restated at the right specificity. */
+.author-skills .about-media.active{ background:var(--cs-ink) !important }
+.author-skills .about-media .about-icon i{
+  color:var(--cs-acc-ink) !important; font-size:30px !important; transform:none !important;
+}
+.author-skills .about-media.active .about-icon i{ color:var(--cs-acc-lift) !important }
+.author-skills .about-media.active .small-heading{ color:#fff !important }
+.author-skills .about-media.active .small-text{ color:rgba(255,255,255,.86) !important }
+.author-skills .small-heading{ color:var(--cs-ink) !important }
+.about-media:hover .about-icon i{ transform:none !important }
+
+/* COUNTER BAND. The demo overlay carries its own background and the section a
+   fixed height, which at narrow widths let white show through behind white
+   text: .count-static measured 1.10:1 at 768 and 390. */
+.counter-sec.counter-image{ height:auto !important }
+.counter-sec .counter-overlay{
+  position:static !important; transform:none !important;
+  width:auto !important; height:auto !important; background-color:transparent !important;
+}
+
+/* The icon span keeps its own colour separate from the <i> glyph inside it, so
+   on the dark active card the span was still the dark ink token: 1.05:1. */
+.author-skills .about-media.active .about-icon{ color:var(--cs-acc-lift) !important }
+
+/* .counter p measured 4.45:1 against a 4.5 floor. Marginal is still a fail:
+   full white text and a fractionally deeper band. */
+.counter p{ color:#fff !important }
+.counter-sec.counter-image{
+  background-image:linear-gradient(100deg, #1A5F52 0%, #26786A 100%) !important;
+}
+/* the demo hover state on the hero button is agency cyan */
+.banner-btn .button:hover i{ background:var(--cs-acc) !important; border-color:var(--cs-acc) !important }
+
+/* ---------- mobile ------------------------------------------------------- */
+/* The demo centres the hero below lg, which pushed the two line eyebrow past
+   the right edge, and its navbar toggler icon is a background SVG the pruned
+   build no longer ships, so the button rendered as an empty box. */
+@media (max-width:991px){
+  .banner-area,.banner-area .banner-text,.banner-area .banner-heading,
+  .banner-area .banner-des,.banner-area .banner-lede{ text-align:left !important }
+  .banner-lede{ max-width:none }
+  .navbar-collapse{
+    background:rgba(16,20,38,.97); margin-top:12px; padding:8px 4px; border-radius:2px;
+  }
+  .navbar .nav-link{ padding:10px 12px !important }
+}
+.navbar-toggler{
+  padding:8px 10px; border-radius:2px; background:transparent;
+  border:1px solid rgba(255,255,255,.42);
+}
+.navbar-toggler:focus{ outline:2px solid var(--cs-acc-lift); outline-offset:2px }
+.navbar-toggler-icon{
+  background-image:none !important; filter:none !important;
+  width:22px; height:2px; background:#fff; display:block; position:relative;
+}
+.navbar-toggler-icon::before,.navbar-toggler-icon::after{
+  content:""; position:absolute; left:0; width:22px; height:2px; background:#fff;
+}
+.navbar-toggler-icon::before{ top:-7px } .navbar-toggler-icon::after{ top:7px }
